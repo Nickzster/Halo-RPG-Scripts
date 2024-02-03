@@ -1,4 +1,4 @@
-(script static void cheat_complete_mission3
+(script static void cheat_skip_mission3
     (ai_erase level_patrols)
 )
 

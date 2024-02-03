@@ -62,7 +62,7 @@
     )
 )
 
-(script static void cheat_complete_mission2
+(script static void cheat_skip_mission2
     (object_cannot_take_damage (players))
     (object_teleport (get_player_object_from 0) oasis_cheat_flag)
     (sleep 30)
