@@ -1,4 +1,4 @@
-(script static void cheat_complete_mission1a
+(script static void cheat_skip_mission1a
     (cheat_complete_mission mission1a pylon_a_field_control)
 )
 
@@ -32,7 +32,7 @@
     (kill_thread (get_executing_running_thread))
 )
 
-(script static void cheat_complete_mission1b
+(script static void cheat_skip_mission1b
     (cheat_complete_mission mission1b pylon_b_field_control)
 )
 
