@@ -457,3 +457,25 @@
     (sleep (in_minutes checkpoint_duration_in_minutes))
 )
 
+(script static void pelican_hover
+    (vehicle_hover pn1 0)
+    (recording_play_and_hover pn1 hover_2)
+)
+
+(script static void pelican_reset
+    (object_create_anew pn1)
+    (object_teleport pn1 pelican_idle_hangar)
+    (vehicle_hover pn1 1)
+    (unit_set_enterable_by_player pn1 1)
+)
+
+(script static void pelican_launch_to_bravo
+    (object_teleport pn1 launch_supply_pad_bravo)
+    (recording_play_and_delete pn1 pelican_bravo_dropoff_1)
+)
+
+(script static void pelican_launch_to_alpha
+    (object_teleport pn1 launch_supply_pad_alpha)
+    (recording_play_and_delete pn1 pelican_alpha_dropoff_1)
+)
+
