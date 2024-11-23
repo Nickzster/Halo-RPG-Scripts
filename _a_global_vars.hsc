@@ -9,6 +9,10 @@
 (global boolean plasma_cannon_unlocked false)
 (global object_definition flamethrower_ref weapons\flamethrower\flamethrower)
 (global boolean flamethrower_unlocked false)
+(global object_definition ma5s_ref weapons\ma5s\ma5s)
+(global boolean ma5s_unlocked false)
+(global object_definition spistol_ref cmt\weapons\human\odst_pistol\odst_pistol)
+(global boolean spistol_unlocked false)
 
 (global boolean is_player_in_base false) 
 (global boolean player_can_be_naughty false); the player is either in the base or outside

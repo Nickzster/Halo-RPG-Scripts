@@ -52,6 +52,18 @@
     (kill_thread (get_executing_running_thread))
 )
 
+(script continuous check_unlock_ma5s
+    (sleep_until (player_is_holding_weapon ma5s_ref))
+    (unlock_weapon unlocked_ma5s "sar")
+    (kill_thread (get_executing_running_thread))
+)
+
+(script continuous check_unlock_spistol
+    (sleep_until (player_is_holding_weapon spistol_ref))
+    (unlock_weapon unlocked_spistol "spi")
+    (kill_thread (get_executing_running_thread))
+)
+
 (script static void setup_naughty_boy
     (print "you've been a naughty boy...")
     (turn_off_mission_switches)
