@@ -130,6 +130,8 @@
     (if (= rocket_launcher_unlocked true) (object_create_anew_containing "rl"))
     (if (= plasma_cannon_unlocked true) (object_create_anew_containing "pc"))
     (if (= flamethrower_unlocked true) (object_create_anew_containing "ft"))
+    (if (= spistol_unlocked true) (object_create_anew_containing "sp"))
+    (if (= ma5s_unlocked true) (object_create_anew_containing "sa"))
 )
 
 (script static void cleanup_patrol_vehicles
