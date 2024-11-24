@@ -407,6 +407,7 @@
     (ai_erase base_humans)
     ; Destroy all base objects when exiting to improve performance
     (object_destroy_containing "base_")
+    (object_destroy pn1)
     (sleep 1)
     ; rec is short for recovery. In case the player loses their vehicle in combat, they can find a recovery vehicle to use.
     (object_create_anew_containing "rec_")

@@ -102,6 +102,12 @@
     (sleep_until (= mountain_dp_unlocked true))
     (sleep_until (= (device_get_position ft_mountain_control) 1))
     (device_set_position_immediate ft_mountain_control 0)
+    (if (= current_mission 6) 
+        (begin 
+            (kill_thread (get_executing_running_thread))
+            (object_destroy ft_mountain_control)
+        )
+    )
     (set selected_travel_location 1)
     ; Vehicle deployment: 25 to 27 seconds
     ; Player deployment: 36 to 38 seconds
@@ -113,6 +119,12 @@
     (sleep_until (= village_dp_unlocked true))
     (sleep_until (= (device_get_position ft_village_control) 1))
     (device_set_position_immediate ft_village_control 0)
+    (if (= current_mission 6) 
+        (begin 
+            (kill_thread (get_executing_running_thread))
+            (object_destroy ft_village_control)
+        )
+    )
     (set selected_travel_location 0)
     ; Vehicle deployment: 84s to 86s
     ; Player deployment: 93s to 95s
