@@ -381,7 +381,7 @@
 
 ; Transitioning from hover animation inside hole to flying to drop
 (script static void exit_base_pelican_transition
-    (set music_track_lock false)
+    ; (set music_track_lock false)
     (ai_erase base_humans)
     ; Destroy all base objects when exiting to improve performance
     (object_destroy_containing "base_")
@@ -404,7 +404,7 @@
 (script static void exit_base_foot
     (print "player is exiting base on foot")
     (turn_off_mission_switches)
-    (set music_track_lock false)
+    ; (set music_track_lock false)
     (ai_erase base_humans)
     ; Destroy all base objects when exiting to improve performance
     (object_destroy_containing "base_")
