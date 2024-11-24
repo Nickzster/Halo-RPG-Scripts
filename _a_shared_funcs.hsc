@@ -362,18 +362,54 @@
     )
 )
 
-(script static void exit_base
-    (print "player is exiting base")
+(script static void spawn_world_scenery
+    ; Not sure what ls is short for, but it is currently tied to the dish and two pelicans with the weapon side missions...
+    (object_create_anew_containing "ls_")
+)
+
+(script static void delete_world_scenery
+    (object_destroy_containing "ls_")
+)
+
+; As soon as the player sets foot in pelican
+(script static void exit_base_pelican_hover
+    (print "player is exiting base via pelican")
+    (turn_off_mission_switches)
+)
+
+; Transitioning from hover animation inside hole to flying to drop
+(script static void exit_base_pelican_transition
+    (set music_track_lock false)
+    (ai_erase base_humans)
+    ; Destroy all base objects when exiting to improve performance
+    (object_destroy_containing "base_")
+    (sleep 1)
+    ; rec is short for recovery. In case the player loses their vehicle in combat, they can find a recovery vehicle to use.
+    (object_create_anew_containing "rec_")
+    (spawn_world_scenery)
+    (set player_can_be_naughty false)
+    (toggle_music_lock)
+)
+
+; Player is deployed
+(script static void exit_base_pelican_deployed
+    (respawn_patrols)
+    (handle_mission_enc_spawn)
+    (set is_player_in_base false)
+    (game_save_wrapper)
+)
+
+(script static void exit_base_foot
+    (print "player is exiting base on foot")
     (turn_off_mission_switches)
     (set music_track_lock false)
     (ai_erase base_humans)
     ; Destroy all base objects when exiting to improve performance
     (object_destroy_containing "base_")
     (sleep 1)
-    ; Not sure what ls is short for, but it is currently tied to the dish and two pelicans with the weapon side missions...
-    (object_create_anew_containing "ls_")
     ; rec is short for recovery. In case the player loses their vehicle in combat, they can find a recovery vehicle to use.
     (object_create_anew_containing "rec_")
+    (spawn_world_scenery)
     (respawn_patrols)
     (handle_mission_enc_spawn)
     ; (<void> volume_teleport_players_not_inside <trigger_volume> <cutscene_flag>)
@@ -389,7 +425,7 @@
     (set music_track_lock false)
     (cleanup_patrols)
     (cleanup_mission_enc)
-    (object_destroy_containing "ls_")
+    (delete_world_scenery)
     (object_destroy_containing "rec_")
     (sleep 1)
     (object_create_anew_containing "base_")
@@ -401,6 +437,7 @@
     (set is_player_in_base true)
     (game_save_wrapper)
     (setup_available_missions)
+    (pelican_reset)
 )
 
 (script static void enter_base_ending
@@ -444,7 +481,7 @@
                 (= is_player_in_base true)
 
             )
-            (exit_base)
+            (exit_base_foot)
         )
     )
 )
@@ -462,20 +499,29 @@
     (recording_play_and_hover pn1 hover_2)
 )
 
+(script static void pelican_cleanup_vehicles
+    (object_destroy pelican_hog)
+    (object_destroy pelican_rhog)
+    (object_destroy pelican_tank)
+)
+
+(script static void pelican_load_marines
+    (ai_erase marines_pelican)
+    (sleep 1)
+    (ai_place marines_pelican)
+    (unit_enter_vehicle (unit (list_get (ai_actors marines_pelican/marines) 0)) pn1 "P-riderLM")
+    (unit_enter_vehicle (unit (list_get (ai_actors marines_pelican/marines) 1)) pn1 "P-riderRM")
+)
+
 (script static void pelican_reset
     (object_create_anew pn1)
     (object_teleport pn1 pelican_idle_hangar)
     (vehicle_hover pn1 1)
     (unit_set_enterable_by_player pn1 1)
+    (object_create_anew pelican_hog)
 )
 
-(script static void pelican_launch_to_bravo
-    (object_teleport pn1 launch_supply_pad_bravo)
-    (recording_play_and_delete pn1 pelican_bravo_dropoff_1)
+(script static void (pelican_launch (cutscene_recording dropoff)(cutscene_flag starting_location) )
+    (object_teleport pn1 starting_location)
+    (recording_play_and_delete pn1 dropoff)
 )
-
-(script static void pelican_launch_to_alpha
-    (object_teleport pn1 launch_supply_pad_alpha)
-    (recording_play_and_delete pn1 pelican_alpha_dropoff_1)
-)
-
