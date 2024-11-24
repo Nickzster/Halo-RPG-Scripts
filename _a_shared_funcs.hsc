@@ -249,7 +249,6 @@
                 (object_create_anew_containing "village_dp_")
             )
         ) 
-
     )
 )
 
