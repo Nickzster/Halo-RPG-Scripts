@@ -380,7 +380,6 @@
 
 ; Transitioning from hover animation inside hole to flying to drop
 (script static void exit_base_pelican_transition
-    ; (set music_track_lock false)
     (ai_erase base_humans)
     ; Destroy all base objects when exiting to improve performance
     (object_destroy_containing "base_")
@@ -389,6 +388,7 @@
     (object_create_anew_containing "rec_")
     (spawn_world_scenery)
     (set player_can_be_naughty false)
+    (set is_player_in_base false)
     (toggle_music_lock)
 )
 
@@ -396,7 +396,6 @@
 (script static void exit_base_pelican_deployed
     (respawn_patrols)
     (handle_mission_enc_spawn)
-    (set is_player_in_base false)
     (game_save_wrapper)
 )
 

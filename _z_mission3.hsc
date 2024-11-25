@@ -8,11 +8,16 @@
         (mission_ai_eliminated level_patrols/northeast_lower_plateau_wraith2)
         (mission_ai_eliminated level_patrols/northeast_lower_plateau_ghost1)
         (mission_ai_eliminated level_patrols/northeast_lower_plateau_ghost2)
+        (= is_player_in_base false)
     )
 )
 
 (script static boolean is_mission3_obj2_defeated
-    (mission_ai_eliminated level_patrols/forest_east)
+    (and 
+        (mission_ai_eliminated level_patrols/forest_east)
+        (= is_player_in_base false)
+    )
+
 )
 
 (script static boolean is_mission3_obj3_defeated
@@ -21,6 +26,7 @@
         (mission_ai_eliminated level_patrols/southwest_wraith_2)
         (mission_ai_eliminated level_patrols/southwest_wraith_3)
         (mission_ai_eliminated level_patrols/southwest_gunners)
+        (= is_player_in_base false)
     )
 )
 
@@ -29,7 +35,8 @@
 
 (script continuous handle_mission3_obj3
     (sleep_until (= mission3_active true))
-    (sleep_until (and (= (is_mission3_obj3_defeated) true)(= is_player_in_base false)))
+    (sleep_until (= (is_mission3_obj3_defeated) true))
+    (print "mission3 obj3 defeated")
     (remove_location mission3_obj3)
     (kill_thread (get_executing_running_thread))
 )
@@ -37,16 +44,18 @@
 
 (script continuous handle_mission3_obj2
     (sleep_until (= mission3_active true))
-    (sleep_until (and (= (is_mission3_obj2_defeated) true)(= is_player_in_base false)))
+    (sleep_until (= (is_mission3_obj2_defeated) true))
     (remove_location mission3_obj2)
+    (print "mission3 obj2 defeated")
     (kill_thread (get_executing_running_thread))
 )
 
 
 (script continuous handle_mission3_obj1
     (sleep_until (= mission3_active true))
-    (sleep_until (and (= (is_mission3_obj1_defeated) true)(= is_player_in_base false)))
+    (sleep_until (= (is_mission3_obj1_defeated) true))
     (remove_location mission3_obj1)
+    (print "mission3 obj1 defeated")
     (kill_thread (get_executing_running_thread))
 )
 
@@ -77,9 +86,9 @@
             (= (is_mission3_obj1_defeated) true)
             (= (is_mission3_obj2_defeated) true)
             (= (is_mission3_obj3_defeated) true)
-            (= is_player_in_base false)
         )
     )
+    (set mission3_active false)
     (print_objective mission3_dialog_9)
     (set mission3_is_completed true)
     (set mission3_is_available false)
