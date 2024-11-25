@@ -1,5 +1,5 @@
 (script static void cheat_skip_mission3
-    (ai_erase level_patrols)
+    (ai_erase level_patrols_v2)
 )
 
 (script continuous mission3
@@ -20,7 +20,7 @@
     (print_objective mission3_dialog_6)
     (print_objective mission3_dialog_7)
     (print_objective mission3_dialog_8)
-    (sleep_until (and (mission_ai_eliminated level_patrols) (= is_player_in_base false)))
+    (sleep_until (and (mission_ai_eliminated level_patrols_v2) (= is_player_in_base false)))
     (print_objective mission3_dialog_9)
     (set mission3_is_completed true)
     (set mission3_is_available false)

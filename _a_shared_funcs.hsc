@@ -144,7 +144,7 @@
 (script static void cleanup_patrols
     (print "cleaning up patrols")
     (cleanup_patrol_vehicles)
-    (ai_erase level_patrols)
+    (ai_erase level_patrols_v2)
     (ai_erase banshee_patrols)
 
 )
@@ -172,7 +172,7 @@
 (script static void respawn_patrols
     (print "spawning patrols")
     (respawn_patrol_vehicles)
-    (ai_place level_patrols)
+    (ai_place level_patrols_v2)
     (ai_place banshee_patrols)
 )
 
@@ -229,9 +229,9 @@
             (= current_mission 5)
             (begin
                 ; (ai_place level_patrols) ; Using level patrols for now, will set up own enc for mission 3 later.
-                (ai_erase level_patrols/ridge_1)
-                (ai_erase level_patrols/ridge_2)
-                (ai_erase level_patrols/ridge_stealth)
+                ; (ai_erase level_patrols/ridge_1)
+                ; (ai_erase level_patrols/ridge_2)
+                ; (ai_erase level_patrols/ridge_stealth)
                 (return)
             )
         )
