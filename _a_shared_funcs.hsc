@@ -520,7 +520,6 @@
     (object_teleport pn1 pelican_idle_hangar)
     (vehicle_hover pn1 1)
     (unit_set_enterable_by_player pn1 1)
-    (object_create_anew pelican_hog)
 )
 
 (script static void (pelican_launch (cutscene_recording dropoff)(cutscene_flag starting_location) )
