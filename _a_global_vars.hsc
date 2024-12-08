@@ -14,8 +14,9 @@
 (global object_definition spistol_ref cmt\weapons\human\odst_pistol\odst_pistol)
 (global boolean spistol_unlocked false)
 
-(global boolean is_player_in_base false) 
-(global boolean player_can_be_naughty false); the player is either in the base or outside
+(global boolean is_player_in_base false) ; the player is either in the base or outside
+(global boolean is_player_deployed false) ; player can be riding in pelican: so they are outside, but not on the ground yet.
+(global boolean player_can_be_naughty false)
 
 (global boolean player_is_naughty false)
 

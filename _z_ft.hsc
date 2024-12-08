@@ -102,14 +102,17 @@
     (sleep_until (= mountain_dp_unlocked true))
     (sleep_until (= (device_get_position ft_mountain_control) 1))
     (device_set_position_immediate ft_mountain_control 0)
-    (object_destroy ft_mountain_control)
+    (device_set_power ft_mountain_control 0)
+    (device_set_power ft_mountain_light 1)
     (if (= current_mission 6) (kill_thread (get_executing_running_thread)))
     (set selected_travel_location 1)
+    (print "player queued mountain for ft")
     ; Vehicle deployment: 25 to 27 seconds
     ; Player deployment: 36 to 38 seconds
     (exec_travel 1 1893 1539 pelican_bravo_dropoff_1 launch_supply_pad_bravo)
     (print "mountain travel sequence completed")
-    (object_create_anew ft_mountain_control)
+    (device_set_power ft_mountain_control 1)
+    (device_set_power ft_mountain_light 0)
 )
 
 ; alpha
@@ -117,12 +120,15 @@
     (sleep_until (= village_dp_unlocked true))
     (sleep_until (= (device_get_position ft_village_control) 1))
     (device_set_position_immediate ft_village_control 0)
-    (object_create_anew ft_village_control)
+    (device_set_power ft_village_control 0)
+    (device_set_power ft_village_light 1)
     (if (= current_mission 6)(kill_thread (get_executing_running_thread)))
     (set selected_travel_location 0)
+    (print "player queued village for ft")
     ; Vehicle deployment: 84s to 86s
     ; Player deployment: 93s to 95s
     (exec_travel 0 1705 1407 pelican_alpha_dropoff_1 launch_supply_pad_alpha)
     (print "village travel sequence completed") 
-    (object_create_anew ft_village_control)
+    (device_set_power ft_village_control 1)
+    (device_set_power ft_village_light 0)
 )

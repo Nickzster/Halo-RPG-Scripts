@@ -273,6 +273,7 @@
 
 (script static boolean (mission_ai_eliminated (ai enc) )
     (and
+        (= is_player_deployed true)
         (= is_player_in_base false)
         (<= (ai_living_count enc) 2)
     )
@@ -397,6 +398,7 @@
     (respawn_patrols)
     (handle_mission_enc_spawn)
     (game_save_wrapper)
+    (set is_player_deployed true)
 )
 
 (script static void exit_base_foot
@@ -417,6 +419,7 @@
     ; TODO: Will need to handle teleporting player logic if 1 player exits base
     (set player_can_be_naughty false)
     (set is_player_in_base false)
+    (set is_player_deployed true)
     (game_save_wrapper)
     (toggle_music_lock)
 )
@@ -436,6 +439,7 @@
     (ai_place base_humans)
     (set player_can_be_naughty true)
     (set is_player_in_base true)
+    (set is_player_deployed false)
     (game_save_wrapper)
     (setup_available_missions)
     (pelican_reset)
@@ -480,7 +484,6 @@
             (and 
                 (is_player_in_area exit_base_volume) 
                 (= is_player_in_base true)
-
             )
             (exit_base_foot)
         )

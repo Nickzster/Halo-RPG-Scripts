@@ -9,6 +9,7 @@
         (mission_ai_eliminated level_patrols/northeast_lower_plateau_ghost1)
         (mission_ai_eliminated level_patrols/northeast_lower_plateau_ghost2)
         (= is_player_in_base false)
+        (= is_player_deployed true)
     )
 )
 
@@ -16,6 +17,7 @@
     (and 
         (mission_ai_eliminated level_patrols/forest_east)
         (= is_player_in_base false)
+        (= is_player_deployed true)
     )
 
 )
@@ -27,6 +29,7 @@
         (mission_ai_eliminated level_patrols/southwest_wraith_3)
         (mission_ai_eliminated level_patrols/southwest_gunners)
         (= is_player_in_base false)
+        (= is_player_deployed true)
     )
 )
 
