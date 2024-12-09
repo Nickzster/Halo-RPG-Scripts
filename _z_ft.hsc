@@ -103,8 +103,8 @@
     (sleep_until (= (device_get_position ft_mountain_control) 1))
     (device_set_position_immediate ft_mountain_control 0)
     (device_set_power ft_mountain_control 0)
-    (device_set_power ft_mountain_light 1)
     (if (= current_mission 6) (kill_thread (get_executing_running_thread)))
+    (device_set_power ft_mountain_light 1)
     (set selected_travel_location 1)
     (print "player queued mountain for ft")
     ; Vehicle deployment: 25 to 27 seconds
@@ -121,8 +121,8 @@
     (sleep_until (= (device_get_position ft_village_control) 1))
     (device_set_position_immediate ft_village_control 0)
     (device_set_power ft_village_control 0)
-    (device_set_power ft_village_light 1)
     (if (= current_mission 6)(kill_thread (get_executing_running_thread)))
+    (device_set_power ft_village_light 1)
     (set selected_travel_location 0)
     (print "player queued village for ft")
     ; Vehicle deployment: 84s to 86s

@@ -4,62 +4,65 @@
 
 (script static boolean is_mission3_obj1_defeated
     (and 
-        (mission_ai_eliminated level_patrols/northeast_lower_plateau_wraith1)
-        (mission_ai_eliminated level_patrols/northeast_lower_plateau_wraith2)
-        (mission_ai_eliminated level_patrols/northeast_lower_plateau_ghost1)
-        (mission_ai_eliminated level_patrols/northeast_lower_plateau_ghost2)
         (= is_player_in_base false)
         (= is_player_deployed true)
+        (<= (ai_living_count level_patrols/northeast_lower_plateau_wraith1) 2)
+        (<= (ai_living_count level_patrols/northeast_lower_plateau_wraith2) 2)
+        (<= (ai_living_count level_patrols/northeast_lower_plateau_ghost1) 2)
+        (<= (ai_living_count level_patrols/northeast_lower_plateau_ghost2) 2)
     )
 )
 
 (script static boolean is_mission3_obj2_defeated
     (and 
-        (mission_ai_eliminated level_patrols/forest_east)
         (= is_player_in_base false)
         (= is_player_deployed true)
+        (<= (ai_living_count level_patrols/forest_east) 2)
     )
 
 )
 
 (script static boolean is_mission3_obj3_defeated
     (and 
-        (mission_ai_eliminated level_patrols/southwest_wraith_1)
-        (mission_ai_eliminated level_patrols/southwest_wraith_2)
-        (mission_ai_eliminated level_patrols/southwest_wraith_3)
-        (mission_ai_eliminated level_patrols/southwest_gunners)
         (= is_player_in_base false)
         (= is_player_deployed true)
+        (<= (ai_living_count level_patrols/southwest_wraith_1) 2)
+        (<= (ai_living_count level_patrols/southwest_wraith_2) 2)
+        (<= (ai_living_count level_patrols/southwest_wraith_3) 2)
+        (<= (ai_living_count level_patrols/southwest_gunners) 2)        
     )
 )
 
 
 (global boolean mission3_active false)
+(global boolean mission3_obj1_completed false)
+(global boolean mission3_obj2_completed false)
+(global boolean mission3_obj3_completed false)
 
-(script continuous handle_mission3_obj3
+(script continuous handle_mission3
     (sleep_until (= mission3_active true))
-    (sleep_until (= (is_mission3_obj3_defeated) true))
-    (print "mission3 obj3 defeated")
-    (remove_location mission3_obj3)
-    (kill_thread (get_executing_running_thread))
-)
-
-
-(script continuous handle_mission3_obj2
-    (sleep_until (= mission3_active true))
-    (sleep_until (= (is_mission3_obj2_defeated) true))
-    (remove_location mission3_obj2)
-    (print "mission3 obj2 defeated")
-    (kill_thread (get_executing_running_thread))
-)
-
-
-(script continuous handle_mission3_obj1
-    (sleep_until (= mission3_active true))
-    (sleep_until (= (is_mission3_obj1_defeated) true))
-    (remove_location mission3_obj1)
-    (print "mission3 obj1 defeated")
-    (kill_thread (get_executing_running_thread))
+    (if (= (is_mission3_obj1_defeated) true)
+        (begin
+            (print "mission3 obj1 defeated") 
+            (set mission3_obj1_completed true)
+            (remove_location mission3_obj1)
+        )
+    )
+    (if (= (is_mission3_obj2_defeated) true)
+        (begin
+            (print "mission3 obj2 defeated") 
+            (set mission3_obj2_completed true)
+            (remove_location mission3_obj2)
+        )
+    )
+    (if (= (is_mission3_obj3_defeated) true)
+        (begin
+            (print "mission3 obj3 defeated") 
+            (set mission3_obj3_completed true)
+            (remove_location mission3_obj3)
+        )
+    )
+    (if (= mission3_is_completed true) (kill_thread (get_executing_running_thread)))
 )
 
 (script continuous mission3
@@ -86,9 +89,9 @@
     (set mission3_active true)
     (sleep_until 
         (and 
-            (= (is_mission3_obj1_defeated) true)
-            (= (is_mission3_obj2_defeated) true)
-            (= (is_mission3_obj3_defeated) true)
+            (= mission3_obj1_completed true)
+            (= mission3_obj2_completed true)
+            (= mission3_obj3_completed true)
         )
     )
     (set mission3_active false)

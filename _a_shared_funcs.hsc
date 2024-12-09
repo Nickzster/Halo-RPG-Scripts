@@ -63,7 +63,12 @@
 (global boolean disable_game_save false)
 
 (script static void game_save_wrapper
-    (if (= disable_game_save false) (game_save))
+    (if (= disable_game_save false) 
+        (begin
+            (game_save_cancel)
+            (game_save_no_timeout)
+        )
+    )
 )
 
 (script static boolean (mission_is_ready (boolean is_available)(boolean is_completed))
@@ -125,6 +130,7 @@
     (object_create_anew_containing "frag")
     (object_create_anew_containing "pfrag")
     (object_create_anew_containing "hp")
+    (object_create_anew_containing "ammo")
     (if (= shotgun_unlocked true) (object_create_anew_containing "sg"))
     (if (= sniper_unlocked true) (object_create_anew_containing "sr"))
     (if (= rocket_launcher_unlocked true) (object_create_anew_containing "rl"))
@@ -415,6 +421,7 @@
     (spawn_world_scenery)
     (respawn_patrols)
     (handle_mission_enc_spawn)
+    (sleep 1)
     ; (<void> volume_teleport_players_not_inside <trigger_volume> <cutscene_flag>)
     ; TODO: Will need to handle teleporting player logic if 1 player exits base
     (set player_can_be_naughty false)
@@ -490,7 +497,7 @@
     )
 )
 
-(global short checkpoint_duration_in_minutes 1)
+(global short checkpoint_duration_in_minutes 2)
 
 (script continuous checkpoint_manager
     (sleep_until (and (rpg_started) (= is_player_in_base false)))
