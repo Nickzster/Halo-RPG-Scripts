@@ -110,6 +110,10 @@
     (cleanup_mission_control pylon_b_control_base pylon_b_flag)
     (cleanup_mission_control unlock_ft_mountain_control unlock_ft_village_flag)
     (cleanup_mission_control unlock_ft_village_control unlock_ft_mountain_flag)
+    (device_set_power ft_village_control 0)
+    (device_set_power ft_village_light 0)
+    (device_set_power ft_mountain_control 0)
+    (device_set_power ft_mountain_light 0)
     (remove_location base_ops_center_entrance)
 )
 
@@ -152,6 +156,18 @@
     (cleanup_patrol_vehicles)
     (ai_erase level_patrols)
     (ai_erase banshee_patrols)
+    (if 
+        (and 
+        (= mission2_is_available true)
+        (= mission2_is_unlocked false)
+    )
+        (begin 
+            ; remove nav points
+            (remove_location intel_1_flag)
+            (remove_location intel_2_flag)
+            (remove_location intel_3_flag)
+        )
+    )
 
 )
 
@@ -180,6 +196,19 @@
     (respawn_patrol_vehicles)
     (ai_place level_patrols)
     (ai_place banshee_patrols)
+    (if (and 
+        (= mission2_is_available true)
+        (= mission2_is_unlocked false)
+
+    )
+        (begin 
+            ; spawn nav points
+            (if (= intel_1_discovered false) (show_objective_location intel_1_flag))
+            (if (= intel_2_discovered false) (show_objective_location intel_2_flag))
+            (if (= intel_3_discovered false) (show_objective_location intel_3_flag))
+        )
+    )
+
 )
 
 (script static void cleanup_mission_enc

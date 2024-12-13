@@ -74,6 +74,7 @@
 
 (script dormant ending_mission
     (print "starting ending mission")
+    (turn_off_mission_switches)
     (set current_mission 6)
     (sound_alarms)
     (spawn_doors)

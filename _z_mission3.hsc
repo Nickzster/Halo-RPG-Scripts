@@ -6,10 +6,14 @@
     (and 
         (= is_player_in_base false)
         (= is_player_deployed true)
-        (<= (ai_living_count level_patrols/northeast_lower_plateau_wraith1) 2)
-        (<= (ai_living_count level_patrols/northeast_lower_plateau_wraith2) 2)
-        (<= (ai_living_count level_patrols/northeast_lower_plateau_ghost1) 2)
-        (<= (ai_living_count level_patrols/northeast_lower_plateau_ghost2) 2)
+        (<= 
+            (+ 
+                (ai_living_count level_patrols/northeast_lower_plateau_wraith1)
+                (ai_living_count level_patrols/northeast_lower_plateau_wraith2)
+                (ai_living_count level_patrols/northeast_lower_plateau_ghost1)
+                (ai_living_count level_patrols/northeast_lower_plateau_ghost2)
+            )
+        1)
     )
 )
 
@@ -26,10 +30,14 @@
     (and 
         (= is_player_in_base false)
         (= is_player_deployed true)
-        (<= (ai_living_count level_patrols/southwest_wraith_1) 2)
-        (<= (ai_living_count level_patrols/southwest_wraith_2) 2)
-        (<= (ai_living_count level_patrols/southwest_wraith_3) 2)
-        (<= (ai_living_count level_patrols/southwest_gunners) 2)        
+        (<= 
+            (+ 
+                (ai_living_count level_patrols/southwest_wraith_1)
+                (ai_living_count level_patrols/southwest_wraith_2)
+                (ai_living_count level_patrols/southwest_wraith_3)
+                (ai_living_count level_patrols/southwest_gunners)
+            )
+        1)      
     )
 )
 
