@@ -106,14 +106,13 @@
 
 
 (script static void turn_off_mission_switches
+    (print "turning off mission switches")
     (cleanup_mission_control pylon_a_control_base pylon_a_flag)
     (cleanup_mission_control pylon_b_control_base pylon_b_flag)
     (cleanup_mission_control unlock_ft_mountain_control unlock_ft_village_flag)
     (cleanup_mission_control unlock_ft_village_control unlock_ft_mountain_flag)
     (device_set_power ft_village_control 0)
     (device_set_power ft_village_light 0)
-    (device_set_power ft_mountain_control 0)
-    (device_set_power ft_mountain_light 0)
     (remove_location base_ops_center_entrance)
 )
 
@@ -249,6 +248,7 @@
                 (object_create_anew mission1b_cg1)
                 (object_create_anew mission1b_cg2)
                 (object_create_anew_containing "mission1b_scenery")
+                (sleep 1)
                 (ai_place mission1b)
             )
         ) 
@@ -274,6 +274,7 @@
             (= current_mission -2)
             (begin
                 (ai_place mountain_drop_pad)
+                (sleep 1)
                 (object_create_anew_containing "mountain_drop_pad_")
             )
         )
@@ -281,6 +282,7 @@
             (= current_mission -3)
             (begin
                 (ai_place village_drop_pad)
+                (sleep 1)
                 (object_create_anew_containing "village_dp_")
             )
         ) 

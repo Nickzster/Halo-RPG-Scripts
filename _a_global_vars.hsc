@@ -5,7 +5,7 @@
 (global boolean sniper_unlocked false)
 (global object_definition rocket_launcher_ref "weapons\rocket launcher\rocket launcher")
 (global boolean rocket_launcher_unlocked false)
-(global object_definition plasma_cannon_ref weapons\plasma_cannon\plasma_cannon)
+(global object_definition plasma_cannon_ref "weapons\plasma_cannon\_plasma_cannon")
 (global boolean plasma_cannon_unlocked false)
 (global object_definition flamethrower_ref weapons\flamethrower\flamethrower)
 (global boolean flamethrower_unlocked false)

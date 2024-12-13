@@ -74,6 +74,8 @@
 
 (script dormant ending_mission
     (print "starting ending mission")
+    (device_set_power ft_mountain_control 0)
+    (device_set_power ft_mountain_light 0)
     (turn_off_mission_switches)
     (set current_mission 6)
     (sound_alarms)
