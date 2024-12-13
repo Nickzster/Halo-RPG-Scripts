@@ -150,6 +150,6 @@
     (sleep 90)
     (print_objective ending_mission_dialog_4)
     (print_objective ending_mission_dialog_5)
-    (sleep 120)
+    (sleep 210)
     (exit_cinematic)
 )
