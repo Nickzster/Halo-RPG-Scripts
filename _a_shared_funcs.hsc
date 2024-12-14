@@ -526,12 +526,10 @@
     )
 )
 
-(global short checkpoint_duration_in_minutes 2)
-
 (script continuous checkpoint_manager
     (sleep_until (and (rpg_started) (= is_player_in_base false)))
     (game_save_wrapper)
-    (sleep (in_minutes checkpoint_duration_in_minutes))
+    (sleep (* 30 90))
 )
 
 (script static void pelican_hover
