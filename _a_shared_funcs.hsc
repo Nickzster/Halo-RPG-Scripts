@@ -111,8 +111,6 @@
     (cleanup_mission_control pylon_b_control_base pylon_b_flag)
     (cleanup_mission_control unlock_ft_mountain_control unlock_ft_village_flag)
     (cleanup_mission_control unlock_ft_village_control unlock_ft_mountain_flag)
-    (device_set_power ft_village_control 0)
-    (device_set_power ft_village_light 0)
     (remove_location base_ops_center_entrance)
 )
 
