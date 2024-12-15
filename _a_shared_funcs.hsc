@@ -562,3 +562,21 @@
     (object_teleport pn1 starting_location)
     (recording_play_and_delete pn1 dropoff)
 )
+
+(script static unit (get_unit_from_enc (ai enc) (short unit_index))
+    (unit (list_get (ai_actors enc) unit_index))
+)
+
+(global short i 0)
+
+(script continuous base_kill_volume
+    ; players
+    (if (volume_test_object hangar_kill_volume (get_player_object_from 0))(unit_kill (unit (get_player_object_from 0))))
+    (if (volume_test_object hangar_kill_volume (get_player_object_from 1))(unit_kill (unit (get_player_object_from 1))))
+    ; intro_base
+    (if (volume_test_object hangar_kill_volume (get_unit_from_enc intro_base i))(unit_kill (get_unit_from_enc intro_base i)))
+    ; ending_mission
+    (if (volume_test_object hangar_kill_volume (get_unit_from_enc ending_mission i))(unit_kill (get_unit_from_enc ending_mission i)))
+    (set i (+ i 1))
+    (if (= i 100) (set i 0))
+)

@@ -23,14 +23,16 @@
 )
 
 (script continuous check_unlock_sniper
-    (sleep_until (player_is_holding_weapon rocket_launcher_ref))
-    (unlock_weapon unlocked_rocket "rl")
+    (sleep_until (player_is_holding_weapon sniper_ref))
+    (unlock_weapon unlocked_sniper "sr")
+    (set sniper_unlocked true)
     (kill_thread (get_executing_running_thread))
 )
 
 (script continuous check_unlock_rocket_launcher
-    (sleep_until (player_is_holding_weapon sniper_ref))
-    (unlock_weapon unlocked_sniper "sr")
+    (sleep_until (player_is_holding_weapon rocket_launcher_ref))
+    (unlock_weapon unlocked_rocket "rl")
+    (set rocket_launcher_unlocked true)
     (kill_thread (get_executing_running_thread))
 )
 
@@ -38,31 +40,35 @@
     (print "starting plasma cannon sq")
     (sleep_until (player_is_holding_weapon plasma_cannon_ref))
     (print "player is holding a plasma cannon")
-    (unlock_weapon unlocked_plasma_cannon "pc")
+    (set plasma_cannon_unlocked true)
     (kill_thread (get_executing_running_thread))
 )
 
 (script continuous check_unlock_flamethrower
     (sleep_until (player_is_holding_weapon flamethrower_ref))
     (unlock_weapon unlocked_flamethrower "ft")
+    (set flamethrower_unlocked true)
     (kill_thread (get_executing_running_thread))
 )
 
 (script continuous check_unlock_shotgun
     (sleep_until (player_is_holding_weapon shotgun_ref))
     (unlock_weapon unlocked_shotgun "sg")
+    (set shotgun_unlocked true)
     (kill_thread (get_executing_running_thread))
 )
 
 (script continuous check_unlock_ma5s
     (sleep_until (player_is_holding_weapon ma5s_ref))
     (unlock_weapon unlocked_ma5s "sa")
+    (set ma5s_unlocked true)
     (kill_thread (get_executing_running_thread))
 )
 
 (script continuous check_unlock_spistol
     (sleep_until (player_is_holding_weapon spistol_ref))
     (unlock_weapon unlocked_spistol "sp")
+    (set spistol_unlocked true)
     (kill_thread (get_executing_running_thread))
 )
 
