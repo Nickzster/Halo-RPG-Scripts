@@ -191,28 +191,28 @@
     (set mountain_dp_is_available true)
 )
 
-(script static void start_ft_side_quest
-    (sleep_until
-        (or
-            (= mission1a_is_completed true)
-            (= mission1b_is_completed true)
-            (= mission1c_is_completed true)
-        )
-    )
-    (print "flamethrower side quest now available")
-    (object_create_anew sq_flamethrower)
-)
+; (script static void start_ft_side_quest
+;     (sleep_until
+;         (or
+;             (= mission1a_is_completed true)
+;             (= mission1b_is_completed true)
+;             (= mission1c_is_completed true)
+;         )
+;     )
+;     (print "flamethrower side quest now available")
+;     (object_create_anew sq_flamethrower)
+; )
 
-(global boolean start_side_quests false)
-(script continuous setup_side_quests
-    (sleep_until (= start_side_quests true))
-    (print "setting up side quests")
-    (object_create_anew sq_sniper_rifle)
-    (object_create_anew sq_rocket_launcher)
-    (object_create_anew sq_plasma_cannon)
-    (start_ft_side_quest)
-    (kill_thread (get_executing_running_thread))
-)
+; (global boolean start_side_quests false)
+; (script continuous setup_side_quests
+;     (sleep_until (= start_side_quests true))
+;     (print "setting up side quests")
+;     (object_create_anew sq_sniper_rifle)
+;     (object_create_anew sq_rocket_launcher)
+;     (object_create_anew sq_plasma_cannon)
+;     (start_ft_side_quest)
+;     (kill_thread (get_executing_running_thread))
+; )
 
 
 

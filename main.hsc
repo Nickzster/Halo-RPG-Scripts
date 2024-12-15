@@ -16,7 +16,7 @@
     (device_set_power intel_1_field_control 1)
     (device_set_power intel_2_field_control 1)
     (device_set_power intel_3_field_control 1)
-    (set start_side_quests true)
+    ; (set start_side_quests true)
     (bootstrap_mission1)
     (device_set_power motor_pool_door 1)
     (release_mission_lock)
