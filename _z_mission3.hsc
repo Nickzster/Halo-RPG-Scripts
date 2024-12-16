@@ -76,7 +76,7 @@
 (script continuous mission3
     (sleep_until (and (= mission2_is_completed true) (= mission3_is_available true)))
     (print "waiting to start mission 3")
-    (wait_for_players_to_enter_area ops_center_entrance)
+    (sleep_until (volume_test_objects ops_center_entrance (players)))
     (if (not (grab_mission_lock 5))(return))
     (print "starting mission 3")
     (object_create_anew_containing "ending_human_ship")

@@ -118,10 +118,6 @@
     (volume_test_objects vol (players))
 )
 
-(script static void (wait_for_players_to_enter_area (trigger_volume vol))
-    (sleep_until (is_player_in_area vol))
-)
-
 (script static void respawn_armory
     (object_create_anew_containing "ar")
     (object_create_anew_containing "pi")
@@ -189,14 +185,31 @@
 )
 
 (script static void respawn_patrols
-    (print "spawning patrols")
-    (respawn_patrol_vehicles)
-    (ai_place level_patrols)
-    (ai_place banshee_patrols)
+    (if (= current_mission 4)
+    ; for mission 4: spawn selective patrols
+    (begin 
+        (print "spawning mission 2 patrols")
+        (ai_place level_patrols/forest_east)
+        (ai_place level_patrols/east_covenant_encampment)
+        (ai_place level_patrols/east_covenant_encampment_boss)
+        (ai_place level_patrols/north_cave_checkpoint)
+        (ai_place level_patrols/south_checkpoint)
+        (ai_place level_patrols/northwest_checkpoint)
+        (ai_place level_patrols/ridge_1)
+        (ai_place level_patrols/ridge_2)
+        (ai_place level_patrols/ridge_stealth)
+    )
+    ; all other missions: spawn patrols as normal
+    (begin 
+        (print "spawning normal patrols")
+        (respawn_patrol_vehicles)
+        (sleep 15)
+        (ai_place level_patrols)
+        (ai_place banshee_patrols)
+    ))
     (if (and 
         (= mission2_is_available true)
         (= mission2_is_unlocked false)
-
     )
         (begin 
             ; spawn nav points
@@ -217,8 +230,8 @@
     (object_destroy_containing "mission1b")
     (object_destroy_containing "mountain_drop_pad_")
     (object_destroy_containing "village_dp_")
-    (object_destroy_containing "mission1a_scenery_")
-    (object_destroy_containing "mission1b_scenery_")
+    (object_destroy_containing "mission1a_scenery")
+    (object_destroy_containing "mission1b_scenery")
     (garbage_collect_now)
     (rasterizer_decals_flush)
 )
@@ -293,15 +306,6 @@
     (set music_track_lock true)
 )
 
-
-(script static boolean is_intro
-    (= current_mission 0)
-)
-
-(script static boolean is_tutorial
-    (= current_mission 1)
-)
-
 (script static boolean is_mission_active
     (= active_mission_lock true)
 )
@@ -334,7 +338,7 @@
 
 (script static boolean rpg_started 
     ; Once the intro & tutorial are completed, the "real" RPG begins.
-    (not (or (is_intro) (is_tutorial)))
+    (not (or (= current_mission 0) (= current_mission 1)))
 )
 
 (script dormant handle_mission2_locked_dialog
@@ -478,7 +482,16 @@
     (set is_player_deployed false)
     (game_save_wrapper)
     (setup_available_missions)
-    (pelican_reset)
+    (sleep 1)
+    ; pelican reset
+    (object_create_anew pn1)
+    (object_teleport pn1 pelican_idle_hangar)
+    (vehicle_hover pn1 1)
+    (unit_set_enterable_by_player pn1 1)
+    (sleep 1)
+    ; setup fast travel switches
+    (if (= village_dp_unlocked true) (device_set_power ft_village_control 1))
+    (if (= mountain_dp_unlocked true) (device_set_power ft_mountain_control 1))
 )
 
 (script static void enter_base_ending
@@ -551,13 +564,6 @@
     (unit_enter_vehicle (unit (list_get (ai_actors marines_pelican/marines) 1)) pn1 "P-riderRM")
 )
 
-(script static void pelican_reset
-    (object_create_anew pn1)
-    (object_teleport pn1 pelican_idle_hangar)
-    (vehicle_hover pn1 1)
-    (unit_set_enterable_by_player pn1 1)
-)
-
 (script static void (pelican_launch (cutscene_recording dropoff)(cutscene_flag starting_location) )
     (object_teleport pn1 starting_location)
     (recording_play_and_delete pn1 dropoff)
@@ -570,9 +576,8 @@
 (global short i 0)
 
 (script continuous base_kill_volume
-    ; players
-    (if (volume_test_object hangar_kill_volume (get_player_object_from 0))(unit_kill (unit (get_player_object_from 0))))
-    (if (volume_test_object hangar_kill_volume (get_player_object_from 1))(unit_kill (unit (get_player_object_from 1))))
+    (sleep_until (or (= current_mission 0) (= current_mission 6)))
+    (print "checking for units")
     ; intro_base
     (if (volume_test_object hangar_kill_volume (get_unit_from_enc intro_base i))(unit_kill (get_unit_from_enc intro_base i)))
     ; ending_mission

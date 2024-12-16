@@ -36,7 +36,6 @@
     (cheat_complete_mission mission1b pylon_b_field_control)
 )
 
-
 (script continuous mission1b
     (sleep_until (= (device_get_position pylon_b_control_base) 1))
     (if (not (grab_mission_lock 3))(return))
@@ -68,7 +67,7 @@
 
 (script static void bootstrap_mission1
     (print "waiting to boostrap mission 1")
-    (wait_for_players_to_enter_area ops_center_entrance)
+    (sleep_until (volume_test_objects ops_center_entrance (players)))
     (print "starting mission 1")
     (print_objective mission1_dialog_1)
     (print_objective mission1_dialog_2)

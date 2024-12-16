@@ -35,7 +35,8 @@
 ; 1 - Tutorial
 ; 2 - Pylon A
 ; 3 - Pylon B
-; 4 - Dsable Planetary defenses
+; 4 - Disable Planetary defenses
 ; 5 - Repel the invasion
+; 6 - Hangar Attack & Ending
 
 

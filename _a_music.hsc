@@ -74,7 +74,7 @@
 )
 
 (script continuous music_manager
-    (sleep_until (not (is_intro))) 
+    (sleep_until (not (= current_mission 0))) 
     (sleep_until (= music_track_lock true))
     (begin
         (cond 

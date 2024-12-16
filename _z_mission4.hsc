@@ -75,7 +75,7 @@
 (script dormant ending_mission
     (print "starting ending mission")
     (device_set_power ft_mountain_control 0)
-    (device_set_power ft_mountain_light 0)
+    (device_set_power ft_village_control 0)
     (turn_off_mission_switches)
     (set current_mission 6)
     (sound_alarms)
@@ -89,7 +89,7 @@
     (print_objective ending_mission_dialog_1)
     (print_objective ending_mission_dialog_2)
     (print_objective ending_mission_dialog_3)
-    (wait_for_players_to_enter_area ending_hangar_volume)
+    (sleep_until (volume_test_objects ending_hangar_volume (players)))
     (device_set_position_immediate motor_pool_door 0)
     (device_set_power motor_pool_door 0)
     (sleep 90)

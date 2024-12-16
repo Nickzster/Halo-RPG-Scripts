@@ -6,10 +6,6 @@
 (global boolean tutorial_tl_completed false)
 (global boolean tutorial_skipped false)
 
-(script static void wait_until_tutorial_is_active
-    (sleep_until (is_tutorial) )
-)
-
 (script static void skip_tutorial
     (set tutorial_skipped true)
     (set tutorial_hr_completed true)
@@ -30,8 +26,14 @@
 
 (script continuous hangar_tutorial
     (if (= tutorial_skipped true) (kill_thread (get_executing_running_thread)))
-    (wait_until_tutorial_is_active)
-    (wait_for_players_to_enter_area hangar_tutorial)
+    (sleep_until (= current_mission 1))
+    (sleep_until      
+        (or 
+            (volume_test_objects hangar_tutorial (players)) 
+            (= tutorial_skipped true)
+
+        )
+    )
     (if (= tutorial_skipped true) (kill_thread (get_executing_running_thread)))
     (print "hangar tutorial")
     (remove_location base_hangar)
@@ -48,8 +50,14 @@
 
 (script continuous armory_tutorial
     (if (= tutorial_skipped true) (kill_thread (get_executing_running_thread)))
-    (wait_until_tutorial_is_active)
-    (wait_for_players_to_enter_area armory_tutorial)
+    (sleep_until (= current_mission 1) )
+    (sleep_until      
+        (or 
+            (volume_test_objects armory_tutorial (players)) 
+            (= tutorial_skipped true)
+
+        )
+    )
     (if (= tutorial_skipped true) (kill_thread (get_executing_running_thread)))
     (print "armory tutorial")
     (remove_location base_armory)
@@ -65,11 +73,13 @@
 
 (script continuous med_bay_tutorial
     (if (= tutorial_skipped true) (kill_thread (get_executing_running_thread)))
-    (wait_until_tutorial_is_active)
-    (sleep_until 
-        (or
-            (is_player_in_area med_bay_a_tutorial)
-            (is_player_in_area med_bay_b_tutorial)
+    (sleep_until (= current_mission 1) )
+    (sleep_until      
+        (or 
+            (volume_test_objects med_bay_a_tutorial (players)) 
+            (volume_test_objects med_bay_b_tutorial (players)) 
+            (= tutorial_skipped true)
+
         )
     )
     (if (= tutorial_skipped true) (kill_thread (get_executing_running_thread)))
@@ -87,8 +97,14 @@
 
 (script continuous motor_pool_tutorial
     (if (= tutorial_skipped true) (kill_thread (get_executing_running_thread)))
-    (wait_until_tutorial_is_active)
-    (wait_for_players_to_enter_area motor_pool_tutorial)
+    (sleep_until (= current_mission 1) )
+    (sleep_until      
+        (or 
+            (volume_test_objects motor_pool_tutorial (players)) 
+            (= tutorial_skipped true)
+
+        )
+    )
     (if (= tutorial_skipped true) (kill_thread (get_executing_running_thread)))
     (print "motor pool tutorial")
     (remove_location base_motor_pool)
@@ -103,8 +119,14 @@
 
 (script continuous operations_center_tutorial
     (if (= tutorial_skipped true) (kill_thread (get_executing_running_thread)))
-    (wait_until_tutorial_is_active)
-    (wait_for_players_to_enter_area operations_center_tutorial)
+    (sleep_until (= current_mission 1) )
+    (sleep_until      
+        (or 
+            (volume_test_objects operations_center_tutorial (players)) 
+            (= tutorial_skipped true)
+
+        )
+    )
     (if (= tutorial_skipped true) (kill_thread (get_executing_running_thread)))
     (print "operations tutorial")
     (remove_location base_ops_center)
@@ -118,8 +140,14 @@
 
 (script continuous terminal_tutorial
     (if (= tutorial_skipped true) (kill_thread (get_executing_running_thread)))
-    (wait_until_tutorial_is_active)
-    (wait_for_players_to_enter_area terminal_tutorial)
+    (sleep_until (= current_mission 1) )
+    (sleep_until      
+        (or 
+            (volume_test_objects terminal_tutorial (players)) 
+            (= tutorial_skipped true)
+
+        )
+    )
     (if (= tutorial_skipped true) (kill_thread (get_executing_running_thread)))
     (print "terminal tutorial")
     (remove_location terminals)
@@ -133,7 +161,7 @@
 )
 
 (script continuous check_skip_tutorial
-    (wait_until_tutorial_is_active)
+    (sleep_until (= current_mission 1) )
     (sleep_until 
         (or
             (= (device_get_position skip_tutorial_control) 1)

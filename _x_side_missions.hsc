@@ -37,9 +37,8 @@
 )
 
 (script continuous check_unlock_plasma_cannon
-    (print "starting plasma cannon sq")
     (sleep_until (player_is_holding_weapon plasma_cannon_ref))
-    (print "player is holding a plasma cannon")
+    (unlock_weapon unlocked_plasma_cannon "pc")
     (set plasma_cannon_unlocked true)
     (kill_thread (get_executing_running_thread))
 )
