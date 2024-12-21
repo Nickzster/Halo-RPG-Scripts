@@ -492,6 +492,9 @@
     ; setup fast travel switches
     (if (= village_dp_unlocked true) (device_set_power ft_village_control 1))
     (if (= mountain_dp_unlocked true) (device_set_power ft_mountain_control 1))
+    ; setup fast travel helpers
+    (if (and (= used_mountain_ft false)(= mountain_dp_unlocked true)) (show_objective_location unlock_ft_mountain_flag))
+    (if (and (= used_village_ft false)(= village_dp_unlocked true)) (show_objective_location unlock_ft_village_flag))
 )
 
 (script static void enter_base_ending

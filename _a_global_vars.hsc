@@ -24,6 +24,9 @@
 
 (global short number_of_players 1) ; used to track player count for special things. Not using player_spawn_count for easier testing.
 
+(global boolean used_village_ft false)
+(global boolean used_mountain_ft false)
+
 ; >=0 are main missions
 ; < 0 are active side quests & exploration
 (global boolean music_track_lock false) ; corresponds to current_mission

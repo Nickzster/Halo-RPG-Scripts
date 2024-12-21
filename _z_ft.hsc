@@ -106,6 +106,8 @@
     (if (= current_mission 6) (kill_thread (get_executing_running_thread)))
     (device_set_power ft_mountain_light 1)
     (set selected_travel_location 1)
+    (remove_location unlock_ft_mountain_flag)
+    (set used_mountain_ft true)
     (print "player queued mountain for ft")
     ; Vehicle deployment: 25 to 27 seconds
     ; Player deployment: 36 to 38 seconds
@@ -124,6 +126,8 @@
     (if (= current_mission 6)(kill_thread (get_executing_running_thread)))
     (device_set_power ft_village_light 1)
     (set selected_travel_location 0)
+    (remove_location unlock_ft_village_flag)
+    (set used_village_ft true)
     (print "player queued village for ft")
     ; Vehicle deployment: 84s to 86s
     ; Player deployment: 93s to 95s
